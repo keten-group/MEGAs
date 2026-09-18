@@ -21,7 +21,7 @@ Run them in this order; each one reads only `data/` and `mega_utils.py`, and the
 | `mechanical_property_prediction.ipynb` | strength and toughness of the 118 contracted designs | bootstrap ensemble of 20 neural networks (PyTorch) with the uncertainty calibration of Palmer et al. (2022); architecture search, benchmark against GPR / *k*-NN / polynomial RSM / random forest, calibration diagnostics, prediction intervals and learning curve | `models/nn_ensemble/` |
 | `pareto_optimization.ipynb` | Pareto sets of strength and toughness | grid search (0.02 cm) over the design space with the GPC as feasibility filter; Pareto sets of the lower confidence bounds $\hat\mu - \kappa\hat\sigma_{\mathrm{cal}}$ | — |
 
-Tables are written to `results/` and figures to `figures/`; the correspondence with the supplementary tables and figures of the paper is listed at the end of each notebook.
+The three training notebooks have a `RETRAIN` switch in their first code cell. With `RETRAIN = False` (default) they load the saved tables in `results/` and the saved models in `models/` and only draw the tables and figures, which takes a few seconds. With `RETRAIN = True` everything is retrained and the saved tables and models are overwritten. The correspondence with the supplementary tables and figures of the paper is listed at the end of each notebook.
 
 ## Data
 
@@ -32,6 +32,7 @@ The notebooks read the supplementary data files of the paper:
 | `data/Supplementary Data 3.xlsx` | `strength_toughness` | tensile strength and toughness of every simulation replicate of the 118 contracted designs |
 | `data/Supplementary Data 4.xlsx` | `configuration type` | configuration type of the 176 designs on the 11 × 16 grid of branch lengths |
 | `data/Supplementary Data 4.xlsx` | `1 Bar-dominant`, `2 Balanced`, `3 Y-dominant` | cluster configuration parameters of the 118 contracted designs |
+| `data/Supplementary Data 4.xlsx` | `Pareto sets` | the Pareto sets $P_\kappa$ ($\kappa = 0, 1, 1.645$) found by `pareto_optimization.ipynb` (output, not an input of the notebooks) |
 
 ## Installation
 
@@ -40,4 +41,4 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Tested with Python 3.13, NumPy 1.26, pandas 3.0, scikit-learn 1.8, PyTorch 2.13 (CPU), GPyTorch 1.15 and Shapely 2.1. All computations run on CPU; the notebooks use `joblib` to parallelise the repeated splits and ensemble members (`N_JOBS` at the top of each notebook). The property-prediction notebook trains about 950 small networks and takes roughly 10–20 minutes on a 16-core workstation, the others a few minutes each. All random seeds are fixed, so the reported numbers are reproducible.
+Tested with Python 3.13, NumPy 1.26, pandas 3.0, scikit-learn 1.8, PyTorch 2.13 (CPU), GPyTorch 1.15 and Shapely 2.1. All computations run on CPU; the notebooks use `joblib` to parallelise the repeated splits and ensemble members (`N_JOBS` at the top of each notebook). With `RETRAIN = True` the property-prediction notebook trains about 950 small networks and takes roughly 10–20 minutes on a 16-core workstation, the others a few minutes each. All random seeds are fixed, so the reported numbers are reproducible.

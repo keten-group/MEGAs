@@ -29,9 +29,8 @@ import pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(HERE, "data")
 RESULTS_DIR = os.path.join(HERE, "results")
-FIGURES_DIR = os.path.join(HERE, "figures")
 MODELS_DIR = os.path.join(HERE, "models")
-for _d in (RESULTS_DIR, FIGURES_DIR, MODELS_DIR):
+for _d in (RESULTS_DIR, MODELS_DIR):
     os.makedirs(_d, exist_ok=True)
 
 # the supplementary data files of the paper
@@ -51,9 +50,18 @@ OUTPUT_UNITS = {"Strength": "N/m", "Toughness": "J/m$^2$"}
 INFEASIBLE_CLASS = 4          # expanded configuration: no property prediction
 CLASS_NAMES = {1: "Bar-dominant", 2: "Balanced", 3: "Y-dominant", 4: "Expanded"}
 
-# palette used in all figures
+# palette and fonts used in all figures
 BLUE = "#64A1FF"
 GREY = "#9C9C9C"
+FIG_FONT = {"font.size": 11, "axes.titlesize": 11, "axes.labelsize": 12,
+            "xtick.labelsize": 10.5, "ytick.labelsize": 10.5, "legend.fontsize": 11}
+
+
+def apply_plot_style() -> None:
+    """Figure style shared by the notebooks."""
+    import matplotlib as mpl
+    mpl.rcParams.update({**FIG_FONT, "figure.dpi": 120, "savefig.dpi": 300,
+                         "axes.spines.top": False, "axes.spines.right": False})
 
 
 # --------------------------------------------------------------------------
@@ -176,12 +184,6 @@ def load_results(name: str) -> pd.DataFrame:
     return pd.read_csv(os.path.join(RESULTS_DIR, name))
 
 
-def save_figure(fig, name: str) -> None:
-    for ext in ("pdf", "png"):
-        fig.savefig(os.path.join(FIGURES_DIR, f"{name}.{ext}"), bbox_inches="tight", dpi=300)
-    print(f"wrote figures/{name}.pdf/.png")
-
-
 # --------------------------------------------------------------------------
 # Cluster-configuration data
 # --------------------------------------------------------------------------
@@ -217,21 +219,18 @@ def load_configuration(sheet_label: str) -> pd.DataFrame:
 
 
 def load_configuration_all() -> pd.DataFrame:
-    """All 118 contracted designs pooled, with a ``Type`` column.  θB has a π
-    ambiguity (a bar is symmetric) and is wrapped to (-π/2, π/2]."""
+    """All 118 contracted designs pooled, with a ``Type`` column.  A Bar unit
+    is invariant under a rotation of π, and the data file gives θBar in
+    (-π/2, π/2] so that it varies continuously across the three types."""
     frames = []
     for name in CONFIG_SHEETS:
         d = load_configuration(name)
         d["Type"] = name
         frames.append(d)
     data = pd.concat(frames, ignore_index=True)
-    data["thetaB"] = wrap_pi(data["thetaB"])
     assert data.duplicated(subset=["L0Bar", "L0Y"]).sum() == 0
+    assert data["thetaB"].abs().max() <= np.pi / 2, "θBar is expected in (-π/2, π/2]"
     return data
-
-
-def wrap_pi(t):
-    return ((np.asarray(t, dtype=float) + np.pi / 2) % np.pi) - np.pi / 2
 
 
 def config_xy(df: pd.DataFrame):
