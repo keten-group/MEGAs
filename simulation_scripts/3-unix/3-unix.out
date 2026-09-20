@@ -1,0 +1,33 @@
+simrandseed: 57932.
+traj length: 10000.00 frames.
+Lx: 0.3885 m, Ly: 1.1035 m.
+Initial volume fraction: 0.2426
+Wait to start simulation by rank: 0.
+Finished run(0) by rank: 0.
+Total mag energy:-3.68365841791897 J.
+Total ALJ energy:5.926838504175316e-05 J.
+Will perform 10 runs.
+Ready for 1 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 2 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 3 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 4 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 5 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 6 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 7 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 8 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 9 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Ready for 10 uniaxial pulling by rank: 0.
+1st uniaxial pulling simulation finished by rank: 0.
+Initial Lx: 0.3884526789188385 m, Ly: 1.103543758392334 m.
+Current Lx: 0.5438337489325631 m, Ly: 1.103543758392334 m.
+Current step: 100000000
+Finished simulation by rank: 0.
