@@ -1,0 +1,17 @@
+simrandseed: 54208.
+Lx: 0.3890 m, Ly: 1.1025 m.
+Initial volume fraction: 0.2425
+Wait to start simulation by rank: 0.
+Finished run(0) by rank: 0.
+Total mag energy:-3.6833529548153687 J.
+Total ALJ energy:7.186540011065029e-05 J.
+Will perform 3 runs.
+Ready for 1 npt by rank: 0.
+1 npt simulation finished by rank: 0.
+Ready for 2 npt by rank: 0.
+2 npt simulation finished by rank: 0.
+Ready for 3 npt by rank: 0.
+3 npt simulation finished by rank: 0.
+Current Lx: 0.388469984592785 m, Ly: 1.1034797986250895 m.
+Current step: 6000000
+Finished simulation by rank: 0.

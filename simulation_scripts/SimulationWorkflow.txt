@@ -1,0 +1,27 @@
+The simulation workflow is described below using the binary Bar-Y system with (L0,Bar, L0,Y) = (1.4, 1.0) as an example. All particle dynamics simulations were performed using HOOMD-blue version 4.4.1.
+
+Step 1: ./0-free/0-free.py
+  Reads the initial configuration file "Bar1.4_Y1.0_ini.gsd" and equilibrates
+  the system using periodic boundary conditions in both the x and y directions.
+  The resulting configuration is saved as
+  "./0-free/output/MD_npt0_eq4.gsd".
+
+Step 2: ./1-add_vacuum_boundary/1-add_vacuum_boundary.py
+  Reads the equilibrated configuration generated in Step 1,
+  "MD_npt0_eq4.gsd", and adds vacuum regions above and below
+  the lattice. The resulting configuration is saved as
+  "./1-add_vacuum_boundary/output/Bar1.4_Y1.0_vacuum.gsd".
+
+Step 3: ./2-freex/2-freex.py
+  Reads the configuration generated in Step 2,
+  "Bar1.4_Y1.0_vacuum.gsd", and re-equilibrates the
+  system using a periodic boundary condition in the x direction and open
+  boundaries in the y direction. The resulting configuration is saved as
+  "./2-freex/output/MD_npt_eq3.gsd" for the subsequent uniaxial tensile
+  simulation.
+
+Step 4: ./3-unix/3-unix.py
+  Reads the equilibrated configuration generated in Step 3,
+  "MD_npt_eq3.gsd", and performs the uniaxial tensile
+  simulation. The deformation trajectory and pressure history are saved as
+  "./3-unix/output/trajectory.gsd" and "./3-unix/output/log.h5", respectively.
