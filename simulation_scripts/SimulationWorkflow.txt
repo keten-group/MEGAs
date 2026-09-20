@@ -1,4 +1,4 @@
-The simulation workflow is described below using the binary Bar-Y system with (L0,Bar, L0,Y) = (1.4, 1.0) as an example. All particle dynamics simulations were performed using HOOMD-blue version 4.4.1.
+The simulation workflow is described below using the binary Bar–Y system with (L0,Bar, L0,Y) = (1.4, 1.0) as an example. All particle-dynamics simulations were performed using HOOMD-blue version 4.4.1. Due to their large file sizes, the trajectory.gsd files are not included in the output folders in this directory.
 
 Step 1: ./0-free/0-free.py
   Reads the initial configuration file "Bar1.4_Y1.0_ini.gsd" and equilibrates
